@@ -1,0 +1,119 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Bleeding — тренажёр</title>
+<style>
+:root{--bg:#ffeaf3;--gr:linear-gradient(180deg,#ffd1e6,#ffe0e8 45%,#ffeede);--cd:#fff;--tx:#3a2236;--mu:#8a6a85;--ac:#ec5b9a;--a2:#ffe1ee;--ok:#2e9e6b;--no:#d6336c;--bd:#f6c9de;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#2a1426;--gr:linear-gradient(180deg,#3a1636,#2a1426 50%,#2f1a22);--cd:#3a1d36;--tx:#ffeaf4;--mu:#d6a5c4;--ac:#ff7eb6;--a2:#4d2848;--ok:#4cc79a;--no:#ff8fb1;--bd:#63355c}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#2a1426;--gr:linear-gradient(180deg,#3a1636,#2a1426 50%,#2f1a22);--cd:#3a1d36;--tx:#ffeaf4;--mu:#d6a5c4;--ac:#ff7eb6;--a2:#4d2848;--ok:#4cc79a;--no:#ff8fb1;--bd:#63355c}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--gr) fixed,var(--bg);color:var(--tx);font:16px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);padding:8px 10px 0;border-bottom:1px solid var(--bd)}
+.top{display:flex;justify-content:space-between;align-items:center}
+h1{font-size:19px;margin:0}#sc{font-weight:700;color:var(--ac)}
+nav{display:flex;gap:6px;overflow-x:auto;padding:8px 0}
+nav button{flex:none;border:1px solid var(--bd);background:var(--cd);color:var(--tx);border-radius:20px;padding:7px 12px;font:inherit;font-size:14px}
+nav button.on{background:linear-gradient(135deg,#ff7eb6,#ff9a6b);color:#fff;border-color:transparent}
+main{max-width:640px;margin:0 auto;padding:12px 10px 40px}
+h3{margin:18px 0 4px;font-size:18px}.note{color:var(--mu);margin:0 0 10px;font-size:14px}
+.card{background:var(--cd);border:1px solid var(--bd);border-radius:14px;padding:12px;margin:0 0 10px;position:relative}
+.card p{margin:4px 0}.ru{color:var(--mu);font-size:15px}.en{font-size:18px}
+.n{position:absolute;right:10px;top:8px;color:var(--mu);font-size:13px}
+.w{background:var(--a2);border-radius:6px;padding:0 3px;font-weight:600;cursor:pointer}
+.ln{margin:0 0 12px}.tr{background:var(--a2);border-radius:8px;padding:4px 8px;font-size:15px}.tip{color:var(--ac);font-weight:600;min-height:1.2em}
+button{font:inherit;cursor:pointer}
+.sp{border:1px solid var(--bd);background:var(--a2);border-radius:10px;padding:5px 10px;color:var(--tx)}
+.big,.chk{border:0;background:linear-gradient(135deg,#ff7eb6,#ff9a6b);color:#fff;border-radius:12px;padding:9px 14px;margin:2px 6px 6px 0}
+.row{display:flex;gap:6px;margin-top:6px}.row button:last-child{border:1px solid var(--bd);background:none;border-radius:10px;padding:5px 10px;color:var(--tx)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.flip{background:var(--cd);border:1px solid var(--bd);border-radius:14px;padding:10px 8px;min-height:104px;text-align:center;position:relative;cursor:pointer}
+.flip .e{display:block;font-size:26px}.flip small{display:block;color:var(--mu);font-size:12px}.flip .bk b{font-size:18px;color:var(--ac)}
+.flip .sp{position:absolute;right:4px;top:4px;padding:2px 6px;font-size:13px}
+.mt{display:grid;grid-template-columns:1fr 1fr;gap:8px}.col{display:grid;gap:6px;align-content:start}
+.m,.opt{border:1px solid var(--bd);background:var(--cd);color:var(--tx);border-radius:10px;padding:8px;text-align:left;font-size:15px}
+.opt{display:block;width:100%;margin:5px 0}.opt small{display:block;opacity:.7;font-size:13px}
+.sel{outline:2px solid var(--ac)}.bad,.no{background:var(--a2);border-color:var(--no)!important}.done,.ok{background:var(--ok)!important;color:#fff!important;border-color:var(--ok)!important}
+.m.done{opacity:.55}
+input{font:inherit;font-size:17px;border:2px solid var(--bd);border-radius:8px;padding:2px 6px;background:var(--bg);color:var(--tx);max-width:100%}
+input.ok{color:#fff}input.no{border-color:var(--no)}
+.fb{min-height:1.2em;font-weight:600;color:var(--mu);margin:2px 0}
+.ansrow{min-height:46px;border:2px dashed var(--bd);border-radius:10px;padding:5px;display:flex;flex-wrap:wrap;gap:5px;margin:6px 0}
+.ansrow.ok{border-color:var(--ok);border-style:solid}
+.bank{display:flex;flex-wrap:wrap;gap:5px}
+.chip{border:1px solid var(--bd);background:var(--a2);color:var(--tx);border-radius:10px;padding:6px 10px;font-size:16px}
+.bankw{background:var(--a2);border-radius:10px;padding:8px;margin:0 0 10px;text-align:center;font-weight:600}
+.ho{height:16px;border-radius:9px;background:var(--a2);overflow:hidden;border:1px solid var(--bd)}.ho i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#ff7eb6,#ff9a6b);transition:width .4s}
+.win{font-size:20px;text-align:center;color:var(--ok);font-weight:700}
+</style></head><body>
+<header><div class="top"><h1>Bleeding</h1><span id="sc">⭐ 0</span></div><nav></nav></header>
+<main id="app"></main>
+<script>
+const $=s=>document.querySelector(s);
+const say=(t,r=.85)=>{try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=r;speechSynthesis.speak(u)}catch(e){}};
+const sh=a=>[...a].sort(()=>Math.random()-.5);
+let score=0;const add=()=>{score++;$('#sc').textContent='⭐ '+score};
+const h=(t,c,p)=>{const e=document.createElement(t);if(c)e.className=c;if(p!==undefined)e.innerHTML=p;return e};
+const btn=(t,f,c)=>{const b=h('button',c||'',t);b.onclick=f;return b};
+const sec=(c,t,n)=>{c.append(h('h3','',t),h('p','note',n||''))};
+const norm=s=>s.toLowerCase().replace(/[^a-z ]/g,'').replace(/\s+/g,' ').trim();
+const W=[['bleeding','[блИдин]','кровотечение','🤕'],['severe','[сивИэ]','тяжёлый','😣'],['loss','[лос]','потеря','📉'],['case','[кейс]','случай','📁'],['blood transfusion','[блад трансфьЮжен]','переливание крови','🏥'],['blood','[блад]','кровь','🩸'],['nose','[ноуз]','нос','👃'],['arm','[арм]','рука','💪'],['leg','[лэг]','нога','🦵'],['ice','[айс]','лёд','🧊'],['cloth','[клос]','ткань','🧻'],['doctor','[дОктэ]','врач','👩‍⚕️'],['cold','[коулд]','холодный','❄️']];
+const D={doctors:'врачи',pressure:'давление',clean:'чистый',limb:'конечность',compress:'компресс'};W.forEach(w=>D[w[0]]=w[2]);
+const rx=new RegExp('\\b('+Object.keys(D).sort((a,b)=>b.length-a.length).join('|')+')\\b','gi');
+const hl=s=>s.replace(rx,m=>`<span class="w" data-ru="${D[m.toLowerCase()]}">${m}</span>`);
+const S=[['Bleeding can lead to a severe loss of blood.','Кровотечение может привести к тяжёлой потере крови.'],['The best way to stop bleeding is by direct pressure with a clean cloth.','Лучший способ остановить кровотечение — прямое давление чистой тканью.'],['If the bleeding is from the arm or the leg, the limb can be kept in a raised position.','Если кровотечение из руки или ноги, конечность можно держать в приподнятом положении.'],['If the bleeding is from a nose, put a cold compress on the nose.','Если кровотечение из носа, приложите холодный компресс к носу.'],['It will stop the blood.','Это остановит кровь.'],['Ice placed on the nose also stops bleeding.','Лёд, приложенный к носу, тоже останавливает кровотечение.'],['In severe case doctors make blood transfusion.','В тяжёлом случае врачи делают переливание крови.']];
+
+function flips(c,a){const g=h('div','grid');a.forEach(w=>{const k=h('div','flip');k.innerHTML=`<div class="fr"><span class="e">${w[3]}</span><b>${w[0]}</b><small>${w[1]}</small></div><div class="bk" hidden><b>${w[2]}</b></div>`;k.append(btn('🔊',e=>{e.stopPropagation();say(w[0],.7)},'sp'));k.onclick=()=>{k.querySelector('.fr').hidden=!k.querySelector('.fr').hidden;k.querySelector('.bk').hidden=!k.querySelector('.bk').hidden;k.style.paddingTop=k.querySelector('.fr').hidden?'34px':'10px'};g.append(k)});c.append(g)}
+
+function words(c){sec(c,'Новые слова','Нажми на карточку — увидишь перевод. Нажми 🔊 — услышишь слово.');flips(c,W.slice(0,5));sec(c,'Слова-помощники','Эти слова есть в тексте. Они тоже пригодятся.');flips(c,W.slice(5))}
+
+const R=['[блИдин кэн лИд ту э сивИэ лос ов блад]','[зэ бэст уэй ту стоп блИдин из бай дайрЭкт прЭшэ виз э клин клос]','[иф зэ блИдин из фром зи арм ор зэ лэг, зэ лим кэн би кэпт ин э рэйзд пэзИшн]','[иф зэ блИдин из фром э ноуз, пут э коулд кОмпрэс он зэ ноуз]','[ит вил стоп зэ блад]','[айс плэйст он зэ ноуз Олсоу стопс блИдин]','[ин сивИэ кейс дОктэз мэйк блад трансфьЮжен]'];
+function readT(c){sec(c,'Читаем по одному предложению','Читай по строчкам: английский, как читать русскими буквами, перевод. Нажми на цветное слово — увидишь его перевод.');
+S.forEach((s,i)=>{const d=h('div','card');d.innerHTML=`<span class="n">${i+1}</span><p class="en">${hl(s[0])}</p><p class="tr">${R[i]}</p><p class="tip"></p><p class="ru">${s[1]}</p>`;d.querySelectorAll('.w').forEach(w=>w.onclick=()=>d.querySelector('.tip').textContent=w.textContent+' — '+w.dataset.ru);c.append(d)})}
+
+function match(c,pairs){let sel=null;const box=h('div','mt');const col=(arr,k)=>{const d=h('div','col');arr.forEach(p=>{const b=btn(k?p[2]:p[0],()=>pick(b),'m');b.dataset.k=k;b.dataset.id=p[0];d.append(b)});return d};
+const pick=b=>{if(b.dataset.k==='0')say(b.dataset.id,.8);if(sel===b){b.classList.remove('sel');sel=null;return}
+if(!sel){sel=b;b.classList.add('sel');return}
+if(sel.dataset.k===b.dataset.k){sel.classList.remove('sel');sel=b;b.classList.add('sel');return}
+if(sel.dataset.id===b.dataset.id){[sel,b].forEach(x=>{x.className='m done';x.disabled=true});add();sel=null}else{const a=sel;[a,b].forEach(x=>x.classList.add('bad'));setTimeout(()=>[a,b].forEach(x=>x.classList.remove('bad','sel')),500);sel=null}};
+box.append(col(sh(pairs),0),col(sh(pairs),1));c.append(box)}
+function pairs(c){sec(c,'Раунд 1: главные слова','Нажми слово слева, потом его перевод справа.');match(c,W.slice(0,5));sec(c,'Раунд 2: слова-помощники','Так же: слово — перевод.');match(c,W.slice(5,11))}
+
+function quiz(c,items,cb){items.forEach(it=>{const d=h('div','card');d.append(h('p','q',it.q));if(it.ru)d.append(h('p','ru',it.ru));if(it.s)d.append(btn('🔊 Слушать',()=>say(it.s,.8),'sp'));const o=h('div','opts');let done=0;const fb=h('p','fb');(it.f?it.o:sh(it.o)).forEach(t=>{const b=btn(t,()=>{if(done)return;if(t===it.o[0]){done=1;b.classList.add('ok');fb.textContent='Верно!';add();cb&&cb()}else{b.classList.add('no');b.disabled=true;fb.textContent='Попробуй ещё'}},'opt');o.append(b)});d.append(o,fb);c.append(d)})}
+const wrongs=(r,n=2)=>sh(W.map(w=>w[2]).filter(x=>x!==r)).slice(0,n);
+
+function typ(c,items){items.forEach(it=>{const d=h('div','card');const ru=h('p','ru',it.ru);if(it.d){ru.hidden=true;d.append(btn('🔊 Слушать',()=>say(it.a),'big'),btn('🐢 Медленно',()=>say(it.a,.5),'big'))}else d.append(ru);
+const p=h('p','en');const [x,y]=it.en.split('___');const i=h('input');i.autocapitalize='off';i.autocomplete='off';i.size=it.d?22:Math.max(it.a.length+1,6);p.append(x,i,y);d.append(p);if(it.d)d.append(ru);
+const fb=h('p','fb');let ok=0;const chk=()=>{if(ok)return;if(norm(i.value)===norm(it.a)){ok=1;i.className='ok';fb.textContent='Верно!';ru.hidden=false;add();say(it.a)}else{i.className='no';fb.textContent=it.d?'Послушай ещё раз и исправь':'Почти! Попробуй ещё'}};
+i.onkeydown=e=>e.key==='Enter'&&chk();d.append(btn('Проверить',chk,'chk'),fb);c.append(d)})}
+
+function ord(c,items){items.forEach(it=>{const d=h('div','card');d.append(h('p','ru',it.ru));const ans=h('div','ansrow'),bank=h('div','bank'),fb=h('p','fb');let g=0;
+const chk=()=>{ans.classList.remove('ok');if(bank.children.length)return;const t=[...ans.children].map(x=>x.textContent).join(' ');if(t===it.en){fb.textContent='Верно!';ans.classList.add('ok');if(!g){g=1;add()}say(it.en)}else fb.textContent='Не совсем. Нажми на слово, чтобы вернуть его.'};
+sh(it.en.split(' ')).forEach(w=>{const b=btn(w,()=>{(b.parentNode===bank?ans:bank).append(b);fb.textContent='';chk()},'chip');bank.append(b)});d.append(ans,bank,fb);c.append(d)})}
+
+function listen(c){c.append(h('p','note','Включи звук. Если голоса нет — проверь громкость и беззвучный режим на телефоне.'));
+const ow=w=>w[0]+'<small>'+w[2]+'</small>';sec(c,'A. Какое слово ты услышал?','Нажми «Слушать» и выбери английское слово. Перевод написан под ним.');quiz(c,[0,1,2,3,4,6,9].map(i=>({q:'Что ты услышал?',s:W[i][0],o:[ow(W[i]),...sh(W.filter((_,j)=>j!==i)).slice(0,2).map(ow)]})));sec(c,'B. Какое предложение ты услышал?','Выбери английское предложение. Перевод написан под ним.');quiz(c,[0,3,4,5].map(i=>({q:'Что ты услышал?',s:S[i][0],o:[S[i][0]+'<small>'+S[i][1]+'</small>',...sh(S.filter((_,j)=>j!==i)).slice(0,2).map(x=>x[0]+'<small>'+x[1]+'</small>')]})));sec(c,'C. Что значит слово?','Нажми «Слушать», выбери перевод.');quiz(c,[0,1,2,3,4,6,9].map(i=>({q:'Что ты услышал?',s:W[i][0],o:[W[i][2],...wrongs(W[i][2])]})));
+sec(c,'D. Какое предложение ты услышал?','Послушай и выбери правильный перевод.');quiz(c,[0,3,4,5].map(i=>({q:'Выбери перевод',s:S[i][0],o:[S[i][1],...sh(S.filter((_,j)=>j!==i)).slice(0,2).map(x=>x[1])]})));
+sec(c,'E. Диктант','Послушай и напиши то, что услышал. Можно слушать медленно.');typ(c,[{en:'___',a:'ice',ru:'лёд'},{en:'___',a:'blood transfusion',ru:'переливание крови'},{en:'___',a:'It will stop the blood.',ru:'Это остановит кровь.',d:1},{en:'___',a:'Ice also stops bleeding.',ru:'Лёд тоже останавливает кровотечение.',d:1}].map(x=>({...x,d:1})))}
+
+function gaps(c){sec(c,'Впиши слово','Выбери слово из рамки и напиши его в пустое место.');c.append(h('div','bankw','loss · pressure · compress · ice · case · transfusion'));
+typ(c,[{en:'Bleeding can lead to a severe ___ of blood.',a:'loss',ru:'Кровотечение может привести к тяжёлой потере крови.'},{en:'The best way to stop bleeding is direct ___ with a clean cloth.',a:'pressure',ru:'Лучший способ остановить кровотечение — прямое давление чистой тканью.'},{en:'Put a cold ___ on the nose.',a:'compress',ru:'Приложите холодный компресс к носу.'},{en:'___ placed on the nose also stops bleeding.',a:'Ice',ru:'Лёд, приложенный к носу, тоже останавливает кровотечение.'},{en:'In severe ___ doctors make blood transfusion.',a:'case',ru:'В тяжёлом случае врачи делают переливание крови.'},{en:'Doctors make blood ___.',a:'transfusion',ru:'Врачи делают переливание крови.'}])}
+
+function order(c){sec(c,'Собери предложение','Нажимай слова по порядку. Ошиблась — нажми на слово в рамке, оно вернётся.');ord(c,[{en:'It will stop the blood.',ru:'Это остановит кровь.'},{en:'Put a cold compress on the nose.',ru:'Приложите холодный компресс к носу.'},{en:'Doctors make blood transfusion.',ru:'Врачи делают переливание крови.'},{en:'Bleeding can lead to a severe loss of blood.',ru:'Кровотечение может привести к тяжёлой потере крови.'},{en:'Ice placed on the nose also stops bleeding.',ru:'Лёд, приложенный к носу, тоже останавливает кровотечение.'}])}
+
+function tf(c){sec(c,'Верно или неверно?','Прочитай предложение и выбери ответ по тексту.');const T=['True<small>Верно</small>','False<small>Неверно</small>'],F=[T[1],T[0]];
+quiz(c,[{q:'Bleeding can lead to a severe loss of blood.',ru:'Кровотечение может привести к тяжёлой потере крови.',o:T,f:1},{q:'You can stop bleeding with a clean cloth.',ru:'Можно остановить кровотечение чистой тканью.',o:T,f:1},{q:'Put a hot compress on the nose.',ru:'Приложите горячий компресс к носу.',o:F,f:1},{q:'Ice on the nose stops bleeding.',ru:'Лёд на носу останавливает кровотечение.',o:T,f:1},{q:'Doctors make blood transfusion in a severe case.',ru:'В тяжёлом случае врачи делают переливание крови.',o:T,f:1},{q:'Ice is bad for the nose.',ru:'Лёд вреден для носа.',o:F,f:1}])}
+
+function bossT(c){sec(c,'Финальный босс: Доктор Кровотечение','Отвечай правильно — и сила босса падает. Победи его!');const N=7;let hp=N;const bar=h('div','card','<div class="ho"><i></i></div><p class="fb bt">Силы босса: 7 из 7</p>');c.append(bar);
+const cb=()=>{hp--;bar.querySelector('i').style.width=hp/N*100+'%';bar.querySelector('.bt').innerHTML=hp?`Силы босса: ${hp} из ${N}`:'<span class="win">Босс побеждён! 🏆</span>'};
+quiz(c,[{q:'Что значит severe?',o:['тяжёлый','быстрый','холодный']},{q:'Как по-английски «переливание крови»?',o:['blood transfusion','bleeding','blood loss']},{q:'Кровотечение из носа. Что делать?',o:['Приложить холодный компресс','Приложить горячую грелку','Ничего не делать']},{q:'Что ты услышал?',s:'case',o:['случай','потеря','нога']},{q:'Лучший способ остановить кровотечение?',o:['Прямое давление чистой тканью','Бегать','Пить чай']},{q:'Кровотечение из руки или ноги. Что можно сделать?',o:['Держать конечность приподнятой','Опустить руку вниз','Поднять температуру']},{q:'Выбери перевод',s:'In severe case doctors make blood transfusion.',o:[S[6][1],S[4][1],S[0][1]]}],cb)}
+
+function gaps(c){sec(c,'Выбери слово','Прочитай предложение. Нажми на слово, которое подходит. Перевод написан под предложением.');quiz(c,[['Bleeding can lead to a severe ___ of blood.','loss','case','ice','Кровотечение может привести к тяжёлой потере крови.'],['The best way to stop bleeding is direct ___ with a clean cloth.','pressure','compress','case','Лучший способ остановить кровотечение — прямое давление чистой тканью.'],['Put a cold ___ on the nose.','compress','loss','doctor','Приложите холодный компресс к носу.'],['___ placed on the nose also stops bleeding.','Ice','Case','Loss','Лёд, приложенный к носу, тоже останавливает кровотечение.'],['In severe ___ doctors make blood transfusion.','case','ice','nose','В тяжёлом случае врачи делают переливание крови.'],['Doctors make blood ___.','transfusion','pressure','compress','Врачи делают переливание крови.']].map(x=>({q:x[0],ru:x[4],o:[x[1],x[2],x[3]]})))}
+const ST=[['🏥 Хирург',[['Doctor Ivanov is a surgeon.','[дОктэ ивАнов из э сЁджен]','Доктор Иванов — хирург.'],['He has a severe case today.','[хи хэз э сивИэ кейс тудЭй]','Сегодня у него тяжёлый случай.'],['A man has a severe loss of blood.','[э мэн хэз э сивИэ лос ов блад]','У мужчины тяжёлая потеря крови.'],['The doctors make blood transfusion.','[зэ дОктэз мэйк блад трансфьЮжен]','Врачи делают переливание крови.']],'What do the doctors make?',[['Blood transfusion','Переливание крови'],['A cold compress','Холодный компресс'],['A clean cloth','Чистая ткань']],'Что делают врачи?'],['💉 Медсестра',[['Anna is a nurse.','[Эна из э нёрс]','Анна — медсестра.'],['A boy has bleeding from the nose.','[э бой хэз блИдин фром зэ ноуз]','У мальчика кровотечение из носа.'],['Anna puts a cold compress on his nose.','[Эна путс э коулд кОмпрэс он хиз ноуз]','Анна прикладывает холодный компресс к его носу.'],['The bleeding stops.','[зэ блИдин стопс]','Кровотечение останавливается.'],['The boy is happy.','[зэ бой из хЭпи]','Мальчик счастлив.']],'What does Anna put on his nose?',[['A cold compress','Холодный компресс'],['A hot bottle','Горячая грелка'],['A clean cloth','Чистая ткань']],'Что Анна прикладывает к его носу?'],['🚑 Фельдшер',[['Oleg is a paramedic.','[Олэг из э пэрэмЭдик]','Олег — фельдшер.'],['A man has bleeding from the leg.','[э мэн хэз блИдин фром зэ лэг]','У мужчины кровотечение из ноги.'],['Oleg uses a clean cloth and direct pressure.','[Олэг юзиз э клин клос энд дайрЭкт прЭшэ]','Олег использует чистую ткань и прямое давление.'],['The limb is in a raised position.','[зэ лим из ин э рэйзд пэзИшн]','Конечность в приподнятом положении.'],['The man is OK.','[зэ мэн из оукЭй]','Мужчина в порядке.']],'What does Oleg use?',[['A clean cloth and direct pressure','Чистая ткань и прямое давление'],['Ice and a cold compress','Лёд и холодный компресс'],['Blood transfusion','Переливание крови']],'Что использует Олег?']];
+function stories(c){sec(c,'Короткие рассказы','Читай по строчкам: английский, как читать русскими буквами, перевод. В конце — вопрос.');ST.forEach(s=>{c.append(h('h3','',s[0]));const d=h('div','card');s[1].forEach(x=>d.append(h('div','ln',`<p class="en">${x[0]}</p><p class="tr">${x[1]}</p><p class="ru">${x[2]}</p>`)));c.append(d);quiz(c,[{q:s[2],ru:s[4],o:s[3].map(x=>x[0]+'<small>'+x[1]+'</small>')}])})}
+const ob=(a,b)=>a+'<small>'+b+'</small>';
+function bossT(c){sec(c,'Финальный босс: Доктор Кровотечение','Отвечай правильно — и сила босса падает. Победи его!');const N=7;let hp=N;const bar=h('div','card','<div class="ho"><i></i></div><p class="fb bt">Силы босса: 7 из 7</p>');c.append(bar);const cb=()=>{hp--;bar.querySelector('i').style.width=hp/N*100+'%';bar.querySelector('.bt').innerHTML=hp?`Силы босса: ${hp} из ${N}`:'<span class="win">Босс побеждён! 🏆</span>'};
+quiz(c,[{q:'Which word means “тяжёлый”?',ru:'Какое слово значит «тяжёлый»?',o:[ob('severe','тяжёлый'),ob('fast','быстрый'),ob('cold','холодный')]},{q:'How do you say “переливание крови” in English?',ru:'Как по-английски «переливание крови»?',o:[ob('blood transfusion','переливание крови'),ob('bleeding','кровотечение'),ob('blood loss','потеря крови')]},{q:'The bleeding is from a nose. What do you do?',ru:'Кровотечение из носа. Что делать?',o:[ob('Put a cold compress on the nose.','Приложить холодный компресс к носу.'),ob('Put a hot bottle on the nose.','Приложить горячую грелку к носу.'),ob('Do nothing.','Ничего не делать.')]},{q:'What do you hear?',ru:'Что ты слышишь?',s:'case',o:[ob('case','случай'),ob('loss','потеря'),ob('leg','нога')]},{q:'What is the best way to stop bleeding?',ru:'Какой лучший способ остановить кровотечение?',o:[ob('Direct pressure with a clean cloth.','Прямое давление чистой тканью.'),ob('Running.','Бег.'),ob('Drinking tea.','Пить чай.')]},{q:'The bleeding is from the leg. What can you do?',ru:'Кровотечение из ноги. Что можно сделать?',o:[ob('Keep the limb in a raised position.','Держать конечность приподнятой.'),ob('Keep the limb down.','Держать конечность опущенной.'),ob('Do nothing.','Ничего не делать.')]},{q:'What do you hear?',ru:'Что ты слышишь?',s:S[6][0],o:[ob(S[6][0],S[6][1]),ob(S[4][0],S[4][1]),ob(S[0][0],S[0][1])]}],cb)}
+const T=[['📖 Слова',words],['📜 Текст',readT],['📚 Рассказы',stories],['🔗 Пары',pairs],['🎧 Слушаем',listen],['✏️ Пропуски',gaps],['🧩 Порядок',order],['✅ Верно?',tf],['👾 Босс',bossT]];
+const nav=document.querySelector('nav'),app=$('#app');
+function go(i){[...nav.children].forEach((b,j)=>b.classList.toggle('on',i===j));app.innerHTML='';try{speechSynthesis.cancel()}catch(e){}T[i][1](app);scrollTo(0,0)}
+T.forEach((t,i)=>nav.append(btn(t[0],()=>go(i))));go(0);
+</script></body></html>
